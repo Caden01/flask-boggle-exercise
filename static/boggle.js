@@ -32,6 +32,7 @@ function timer() {
     console.log(sec);
     if (sec < 0) {
       clearInterval(timer);
+      $("body").html(`<h1>Game Over</h1> <p>Your score was: ${score}</p>`);
     }
   }, 1000);
 }
