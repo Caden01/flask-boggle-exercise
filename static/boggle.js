@@ -3,6 +3,11 @@ const $input = $("input");
 const $message = $(".message");
 const $timer = $(".timer");
 const $startBtn = $(".start");
+const $container = $(".container");
+const $over = $(".over");
+const $score = $(".score");
+const $highscore = $(".highscore");
+const $timesPlayed = $(".times-played");
 
 let score = 0;
 async function handleForm(evt) {
@@ -22,6 +27,7 @@ async function handleForm(evt) {
     score += word.length;
     console.log(score);
   }
+  $form.trigger("reset");
 }
 
 function timer() {
@@ -32,9 +38,20 @@ function timer() {
     console.log(sec);
     if (sec < 0) {
       clearInterval(timer);
-      $("body").html(`<h1>Game Over</h1> <p>Your score was: ${score}</p>`);
+      showScore();
     }
   }, 1000);
+}
+
+async function showScore() {
+  const res = await axios.post("/show-score", { score: score });
+  console.log(res);
+  $container.hide();
+  $over.text("Game Over");
+  $score.text(`Your score is: ${score}`);
+  if (res.data.new_record == true) {
+    $highscore.text(`New Highscore: ${score}`);
+  }
 }
 
 $form.on("submit", handleForm);

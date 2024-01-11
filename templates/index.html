@@ -9,29 +9,40 @@
 <body>  
 
     <div class="container">
-        <table>
-            {% for cell in board %}
-            <tr>
-                {% for letter in cell %}
-                <td> 
-                    {{ letter }}
-                </td>
-               {% endfor %} 
-            </tr>
-            {% endfor %}
-        </table>
+        <div>
+            <table>
+                {% for cell in board %}
+                <tr>
+                    {% for letter in cell %}
+                    <td> 
+                        {{ letter }}
+                    </td>
+                {% endfor %} 
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <form method="POST">
+            <input name="word" placeholder="word"> 
+            <button>Submit</button>
+        </form>
+
+        <button class="start">Start</button>
+
+        <p>{{times_played}}</p>
+
+        <p class="timer"></p>
+
+        <p class="message"></p>
     </div>
-
-    <form method="POST">
-        <input name="word" placeholder="word"> 
-        <button>Submit</button>
-    </form>
-
-    <button class="start">Start</button>
-
-    <p class="timer"></p>
-
-    <p class="message"></p>
+    
+    <div class="end-container">
+        <h1 class="over"></h1>
+        <p class="score"></p>
+        <p class="highscore"></p>
+        <p class="times-played"></p>
+    </div>
 
     <script src="http://unpkg.com/jquery"></script>
     <script src="https://unpkg.com/axios@0.19.0/dist/axios.js"></script>
