@@ -8,6 +8,8 @@ boggle_game = Boggle()
 
 @app.route("/")
 def home():
+    """Set up game board and display times user had played"""
+
     board = boggle_game.make_board()
     session["board"] = board
     times_played = session.get("times_played", 0)
@@ -16,6 +18,8 @@ def home():
     
 @app.route("/check-word")
 def check_word():
+    """Retrieves user input and checks if it is a valid word"""
+
     word = request.args["word"]
     board = session["board"]
     result = boggle_game.check_valid_word(board, word)
@@ -24,6 +28,7 @@ def check_word():
 
 @app.route("/show-score", methods=["POST"])
 def show_score():
+    """Retrieves the users score to check if they got a new highscore and upadates times user has played"""
     
     score = request.json["score"]
     highscore = session.get("highscore", 0)

@@ -9,7 +9,11 @@ const $score = $(".score");
 const $highscore = $(".highscore");
 const $timesPlayed = $(".times-played");
 
+$form.hide();
+
 let score = 0;
+
+/* Gets users form input and displays if the word is valid and on the board */
 async function handleForm(evt) {
   evt.preventDefault();
   let word = $input.val();
@@ -30,7 +34,9 @@ async function handleForm(evt) {
   $form.trigger("reset");
 }
 
+/* Setup game timer */
 function timer() {
+  $form.show();
   let sec = 60;
   let timer = setInterval(function () {
     $timer.html(sec);
@@ -43,6 +49,7 @@ function timer() {
   }, 1000);
 }
 
+/* "Game Over" screen appers showing user score and highscore */
 async function showScore() {
   const res = await axios.post("/show-score", { score: score });
   console.log(res);
