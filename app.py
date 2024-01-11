@@ -12,3 +12,11 @@ def home():
     session["board"] = board
     
     return render_template("index.html", board=board)
+    
+@app.route("/check-word")
+def check_word():
+    word = request.args["word"]
+    board = session["board"]
+    result = boggle_game.check_valid_word(board, word)
+    print(result)
+    return jsonify({"result": result})

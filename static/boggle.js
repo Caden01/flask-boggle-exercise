@@ -1,11 +1,14 @@
 const $form = $("form");
 const $input = $("input");
+const $message = $(".message");
 
 async function handleForm(evt) {
   evt.preventDefault();
-  let input = $input.val();
+  let word = $input.val();
 
-  let res = await axios.get("http://127.0.0.1:8000");
+  const res = await axios.get("/check-word", {
+    params: { word: word },
+  });
   console.log(res);
 }
 
