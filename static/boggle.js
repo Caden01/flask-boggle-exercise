@@ -1,6 +1,8 @@
 const $form = $("form");
 const $input = $("input");
 const $message = $(".message");
+const $timer = $(".timer");
+const $startBtn = $(".start");
 
 let score = 0;
 async function handleForm(evt) {
@@ -22,4 +24,17 @@ async function handleForm(evt) {
   }
 }
 
+function timer() {
+  let sec = 60;
+  let timer = setInterval(function () {
+    $timer.html(sec);
+    sec--;
+    console.log(sec);
+    if (sec < 0) {
+      clearInterval(timer);
+    }
+  }, 1000);
+}
+
 $form.on("submit", handleForm);
+$startBtn.on("click", timer);
